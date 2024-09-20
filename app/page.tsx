@@ -13,6 +13,7 @@ import React, { useState, useEffect } from "react";
 export default function RepoFilter() {
   const [repos, setRepos] = useState([] as Repo[]);
   const [selectedRepoName, setSelectedRepoName] = useState("");
+  const [filteredRepos, setFilteredRepos] = useState<Repo[]>([]);
 
   useEffect(() => {
     fetch("https://api.github.com/users/devvluan/repos")
@@ -20,6 +21,17 @@ export default function RepoFilter() {
       .then(setRepos)
       .catch((error) => console.error("Erro ao buscar repositórios:", error));
   }, []);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSelectedRepoName(value);
+
+    // Filtro dos repositórios baseado no valor digitado
+    const filtered = repos.filter((repo) =>
+      repo.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredRepos(filtered);
+  };
 
   const foundRepo = repos.find((repo) => repo.name === selectedRepoName);
 
