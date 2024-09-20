@@ -24,7 +24,7 @@ export default function RepoFilter() {
   const foundRepo = repos.find((repo) => repo.name === selectedRepoName);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black">
+    <div className="flex items-center justify-center min-h-screen background-linear">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
         <h1 className="text-2xl font-bold mb-4 text-gray-800">
           Selecione um Repositório
