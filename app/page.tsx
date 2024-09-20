@@ -1,5 +1,4 @@
 "use client";
-import { Link } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
 /**
@@ -14,7 +13,6 @@ import React, { useState, useEffect } from "react";
 export default function RepoFilter() {
   const [repos, setRepos] = useState([] as Repo[]);
   const [selectedRepoName, setSelectedRepoName] = useState("");
-  const [filteredRepos, setFilteredRepos] = useState<Repo[]>([]);
 
   useEffect(() => {
     fetch("https://api.github.com/users/devvluan/repos")
@@ -22,17 +20,6 @@ export default function RepoFilter() {
       .then(setRepos)
       .catch((error) => console.error("Erro ao buscar repositórios:", error));
   }, []);
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSelectedRepoName(value);
-
-    // Filtro dos repositórios baseado no valor digitado
-    const filtered = repos.filter((repo) =>
-      repo.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setFilteredRepos(filtered);
-  };
 
   const foundRepo = repos.find((repo) => repo.name === selectedRepoName);
 
@@ -45,7 +32,7 @@ export default function RepoFilter() {
         <input
           list="repos"
           value={selectedRepoName}
-          onChange={handleSearch}
+          onChange={(e) => setSelectedRepoName(e.target.value)}
           placeholder="Digite ou selecione um repositório"
           className="border border-gray-300 p-2 rounded-md w-full mb-4 text-gray-800"
         />
