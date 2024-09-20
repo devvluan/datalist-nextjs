@@ -1,4 +1,4 @@
-This is a project made to train how to map with datalist using Next.js
+This is a project made to train how to `map` with `datalist` using [Next.js](https://nextjs.org)
 
 ## Getting Started
 
