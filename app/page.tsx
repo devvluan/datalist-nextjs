@@ -1,6 +1,16 @@
 "use client";
+import { Link } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
+/**
+ * Componente que renderiza um campo de busca para seleção de repositório do
+ * GitHub, listando os repositórios do usuário "devvluan". O componente também
+ * renderiza o link do repositório selecionado e uma mensagem caso o
+ * repositório seja inexistente.
+ *
+ * @returns Elemento JSX que renderiza o campo de busca e o link do repositório
+ * selecionado.
+ */
 export default function RepoFilter() {
   const [repos, setRepos] = useState([] as Repo[]);
   const [selectedRepoName, setSelectedRepoName] = useState("");
@@ -11,6 +21,8 @@ export default function RepoFilter() {
       .then(setRepos)
       .catch((error) => console.error("Erro ao buscar repositórios:", error));
   }, []);
+
+  const foundRepo = repos.find((repo) => repo.name === selectedRepoName);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
@@ -39,11 +51,9 @@ export default function RepoFilter() {
               Repositório Selecionado:
             </h3>
             <p className="text-gray-600">{selectedRepoName}</p>
-            {repos.find((repo) => repo.name === selectedRepoName) ? (
+            {foundRepo ? (
               <a
-                href={
-                  repos.find((repo) => repo.name === selectedRepoName).html_url
-                }
+                href={foundRepo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 underline mt-2 block"
