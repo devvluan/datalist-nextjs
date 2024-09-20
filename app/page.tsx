@@ -1,5 +1,4 @@
 "use client";
-import { Link } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
 /**
@@ -33,7 +32,7 @@ export default function RepoFilter() {
         <input
           list="repos"
           value={selectedRepoName}
-          onChange={(e) => setSelectedRepoName(e.target.value)}
+          onChange={handleSearch}
           placeholder="Digite ou selecione um repositório"
           className="border border-gray-300 p-2 rounded-md w-full mb-4 text-gray-800"
         />
